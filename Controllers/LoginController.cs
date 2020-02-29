@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication6.Models;
 
 namespace WebApplication6.Controllers
 {
@@ -11,13 +12,23 @@ namespace WebApplication6.Controllers
     [ApiController]
     public class LoginController : Controller
     {
-        string _login = "admin";
-        string _password = "admin";
-        [HttpPost]
-        public int Login([FromHeader] string login, [FromHeader]string password)
+        UsersContext db;
+        public LoginController(UsersContext context)
         {
-            if (login == _login && password == _password)
-                return 1;
+            db = context;
+        }
+
+        [HttpPost]
+        public int Login([FromForm] string login, [FromForm]string password)
+        {
+            if (db.Users.Find(login) != null)
+            {
+                User user = db.Users.Find(login);
+                if (user.Password == password)
+                    return user.Role;
+                return -1;
+            }
+
             return -1;
         }
     }
