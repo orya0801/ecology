@@ -4,21 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication6.Models;
 
 namespace WebApplication6.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : Controller
+    public class RegistrationController : Controller
     {
         string _login = "admin";
-        string _password = "admin";
         [HttpPost]
-        public int Login([FromHeader] string login, [FromHeader]string password)
+        public User Register([FromForm]User user)
         {
-            if (login == _login && password == _password)
-                return 1;
-            return -1;
+            if (user.Login != _login)
+            {
+                return user;
+            }
+            return null;
         }
+
     }
 }
