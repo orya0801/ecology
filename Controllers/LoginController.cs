@@ -14,7 +14,7 @@ namespace WebApplication6.Controllers
         string _login = "admin";
         string _password = "admin";
         [HttpPost]
-        public int Login([FromForm]string login, [FromForm] string password)
+        public int Login([FromHeader]string login, [FromHeader] string password)
         {
             if (login == _login && password == _password)
                 return 1;
