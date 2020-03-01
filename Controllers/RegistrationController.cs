@@ -19,8 +19,14 @@ namespace WebApplication6.Controllers
         }
 
         [HttpPost]
-        public User Register([FromHeader]User user)
+        public User Register([FromHeader] int id,[FromHeader] string login,[FromHeader] string password,[FromHeader] int role,[FromHeader] string name)
         {
+            User user = new User();
+            user.Id = id;
+            user.Login = login;
+            user.Name = name;
+            user.Password = password;
+            user.Role = role;
             if (db.Users.Find(user.Login) == null)
             {
                 db.Add(user);
