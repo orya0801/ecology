@@ -20,13 +20,7 @@ namespace WebApplication6
     {
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-
-
-
-
-            services.AddControllers();// используем контроллеры без представлений
+            services.AddControllers();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
         public void Configure(IApplicationBuilder app)
@@ -37,7 +31,7 @@ namespace WebApplication6
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
+                endpoints.MapControllers(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             });
         }
     }
