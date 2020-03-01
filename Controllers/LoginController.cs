@@ -12,23 +12,17 @@ namespace WebApplication6.Controllers
     [ApiController]
     public class LoginController : Controller
     {
-        UsersContext db;
-        public LoginController(UsersContext context)
-        {
-            db = context;
-        }
-
         [HttpPost]
         public int Login([FromHeader] string login, [FromHeader]string password)
         {
-            if (db.Users.Find(login) != null)
+            List<User> users = RegistrationController.Users;
+            foreach (User user in users)
             {
-                User user = db.Users.Find(login);
-                if (user.Password == password)
+                if ((user.Login == login) && (user.Password == password))
+                {
                     return user.Role;
-                return -1;
+                }
             }
-
             return -1;
         }
     }
