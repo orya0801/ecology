@@ -20,7 +20,7 @@ namespace WebApplication6
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=(localdb)\\mssqllocaldb;Database=boxesdbstore;Trusted_Connection=True;";
+            string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
             // устанавливаем контекст данных
             services.AddDbContext<BoxesContext>(options => options.UseSqlServer(con));
 
