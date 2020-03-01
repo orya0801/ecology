@@ -20,11 +20,12 @@ namespace WebApplication6
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
+            string con = "Server=(localdb)\\mssqllocaldb;Database=boxesdbstore;Trusted_Connection=True;";
             // устанавливаем контекст данных
-            services.AddDbContext<UsersContext>(options => options.UseSqlServer(con));
+            services.AddDbContext<BoxesContext>(options => options.UseSqlServer(con));
 
-            services.AddControllers(); // используем контроллеры без представлений
+
+            services.AddControllers();// используем контроллеры без представлений
         }
 
         public void Configure(IApplicationBuilder app)

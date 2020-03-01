@@ -20,7 +20,7 @@ namespace WebApplication6.Controllers
 
         string _login = "admin";
         [HttpPost]
-        public User Register([FromForm]User user)
+        public User Register([FromHeader]User user)
         {
             if (db.Users.Find(user.Login) == null)
             {

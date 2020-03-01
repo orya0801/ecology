@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebApplication6.Models
 {
-    public class ContainerContext
+    public class ProjectDbContext : DbContext
     {
-        public DbSet<Container> Containers { get; set; }
+        public DbSet<Box> Boxes { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
     }
 }
