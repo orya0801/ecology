@@ -12,12 +12,8 @@ namespace WebApplication6.Controllers
     [ApiController]
     public class RegistrationController : Controller
     {
-        UsersContext db;
         public static List<User>Users= new List<User>();
-        public RegistrationController(UsersContext context)
-        {
-            db = context;
-        }
+
 
         [HttpPost]
         public User Register([FromHeader] int id, [FromHeader] string login, [FromHeader] string password, [FromHeader] int role, [FromHeader] string name)

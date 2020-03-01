@@ -15,12 +15,6 @@ namespace WebApplication6.Controllers
     public class BoxesFromAdressController : Controller
     {
 
-        BoxesContext db;
-        public BoxesFromAdressController(BoxesContext context)
-        {
-            db = context;
-        }
-
         [HttpGet("{adress}")]
         public async Task<List<Box>>  GetBoxesFromAdress(string adress)
         {
