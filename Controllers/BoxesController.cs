@@ -19,19 +19,27 @@ namespace WebApplication6.Controllers
             db = context;
             if (!db.Boxes.Any())
             {
-                db.Boxes.Add(new Box { Id = 1, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 316", Owner="zero"});
-                /*
-                db.Containers.Add(new Container { Id = 2, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 216", Owner = "admin" });
-                db.Containers.Add(new Container { Id = 3, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 116", Owner = "zero" });
-                db.Containers.Add(new Container { Id = 4, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 318", Owner = "qwerty" });
-                db.Containers.Add(new Container { Id = 5, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 320", Owner = "zero" });
-                db.Containers.Add(new Container { Id = 6, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 288", Owner = "qwerty" });
-                db.Containers.Add(new Container { Id = 7, Adress = "Кронверский проспект", Fullness = 1, Location = "Кабинет 101", Owner = "zero" });
-                db.Containers.Add(new Container { Id = 8, Adress = "Кронверский проспект", Fullness = 1, Location = "Столовая", Owner = "zero" });
-                db.Containers.Add(new Container { Id = 9, Adress = "Улица Ломоносова", Fullness = 0, Location = "Кабинет 316", Owner = "admin" });
-                db.Containers.Add(new Container { Id = 10, Adress = "Улица Гастелло", Fullness = 0, Location = "Кабинет 316", Owner = "zero" });
-                */
+                db.Boxes.Add(new Box { Id = 1, Adress = "Lomonosova st.", Location = "1200",  Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 2, Adress = "Lomonosova st.", Location = "1300", Owner = "admin", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 3, Adress = "Lomonosova st.", Location= "1400", Owner = "admin", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 4, Adress = "Lomonosova st.", Location = "1500", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 5, Adress = "Lomonosova st.", Location = "2000", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 6, Adress = "Lomonosova st.", Location = "2100", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 7, Adress = "Lomonosova st.", Location = "2300", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 8, Adress = "Lomonosova st.", Location = "2400", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 9, Adress = "Kronversky st.", Location = "1200", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 10, Adress = "Kronversky st.", Location = "1200", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 11, Adress = "Gastello st.", Location = "1200", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 12, Adress = "Gastello st.", Location = "1200", Owner = "qwerty123", Fullness = 1 });
+                db.Boxes.Add(new Box { Id = 13, Adress = "Lomonosova st.", Location = "1200", Owner = "qwerty123", Fullness = 0 });
+
+                db.Database.OpenConnection();
+
+                db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Boxes ON");
                 db.SaveChanges();
+                db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Boxes OFF");
+
+                db.Database.CloseConnection();
             }
         }
 
@@ -41,7 +49,7 @@ namespace WebApplication6.Controllers
             return await db.Boxes.ToListAsync();
         }
 
-        // GET api/containers/5
+        // GET api/users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Box>> Get(int id)
         {
@@ -51,5 +59,50 @@ namespace WebApplication6.Controllers
             return new ObjectResult(user);
         }
 
+        // POST api/users
+        [HttpPost]
+        public async Task<ActionResult<User>> Post(Box user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            db.Boxes.Add(user);
+            await db.SaveChangesAsync();
+            return Ok(user);
+        }
+
+        // PUT api/users/
+        [HttpPut]
+        public async Task<ActionResult<Box>> Put(Box box)
+        {
+            if (box == null)
+            {
+                return BadRequest();
+            }
+            if (!db.Boxes.Any(x => x.Id == box.Id))
+            {
+                return NotFound();
+            }
+
+            db.Update(box);
+            await db.SaveChangesAsync();
+            return Ok(box);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Box>> Delete(int id)
+        {
+            Box box = db.Boxes.FirstOrDefault(x => x.Id == id);
+            if (box == null)
+            {
+                return NotFound();
+            }
+            db.Boxes.Remove(box);
+            await db.SaveChangesAsync();
+            return Ok(box);
+        }
     }
 }

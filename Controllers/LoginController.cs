@@ -19,7 +19,7 @@ namespace WebApplication6.Controllers
         }
 
         [HttpPost]
-        public int Login([FromForm] string login, [FromForm]string password)
+        public int Login([FromHeader] string login, [FromHeader]string password)
         {
             if (db.Users.Find(login) != null)
             {

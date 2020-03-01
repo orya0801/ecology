@@ -18,7 +18,6 @@ namespace WebApplication6.Controllers
             db = context;
         }
 
-        string _login = "admin";
         [HttpPost]
         public User Register([FromHeader]User user)
         {
