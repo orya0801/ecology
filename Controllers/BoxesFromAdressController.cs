@@ -21,13 +21,13 @@ namespace WebApplication6.Controllers
             adress = adress.Replace("[QUOTE]", ".");
             adress = adress.Replace("%20", " ");
             List<Box> boxes = new List<Box>();
-            await foreach(var box in db.Boxes)
-            {
-                if (box.Adress == adress)
-                {
-                    boxes.Add(box);
-                }
-            }
+            //await foreach(var box in db.Boxes)
+            //{
+            //    if (box.Adress == adress)
+            //    {
+            //        boxes.Add(box);
+            //    }
+            //}
             
 
             return boxes;
