@@ -33,7 +33,7 @@ namespace WebApplication6.Controllers
                 db.SaveChanges();
                 return user;
             }
-            return null;
+            return id;
         }
 
     }
