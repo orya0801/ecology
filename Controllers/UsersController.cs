@@ -19,8 +19,8 @@ namespace WebApplication6.Controllers
             db = context;
             if (!db.Users.Any())
             {
-                db.Users.Add(new Models.User { Id = 1, Name = "Daniil", Login = "admin", Password = "admin", Role = 1 });
-                db.Users.Add(new Models.User { Id = 2, Name = "Ivan", Login = "qwerty", Password = "123", Role = 2 });
+                db.Users.Add(new User { Id = 1, Name = "Daniil", Login = "admin", Password = "admin", Role = 1 });
+                db.Users.Add(new User { Id = 2, Name = "Ivan", Login = "qwerty", Password = "123", Role = 2 });
                 db.SaveChanges();
             }
         }

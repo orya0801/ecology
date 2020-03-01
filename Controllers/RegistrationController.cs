@@ -12,12 +12,25 @@ namespace WebApplication6.Controllers
     [ApiController]
     public class RegistrationController : Controller
     {
-        string _login = "admin";
-        [HttpPost]
-        public User Register([FromForm]User user)
+        UsersContext db;
+        public RegistrationController(UsersContext context)
         {
-            if (user.Login != _login)
+            db = context;
+        }
+
+        [HttpPost]
+        public User Register([FromHeader] int id,[FromHeader] string login,[FromHeader] string password,[FromHeader] int role,[FromHeader] string name)
+        {
+            User user = new User();
+            user.Id = id;
+            user.Login = login;
+            user.Name = name;
+            user.Password = password;
+            user.Role = role;
+            if (db.Users.Find(user.Login) == null)
             {
+                db.Add(user);
+                db.SaveChanges();
                 return user;
             }
             return null;
